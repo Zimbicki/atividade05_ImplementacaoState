@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:provider/provider.dart' as provider;
 
-import 'presentation/pages/home_page.dart';
-import 'state/provider/counter_provider.dart';
+import 'presentation/pages/product_list_page.dart';
+import 'state/provider/product_provider.dart';
 
 void main() {
   runApp(
     ProviderScope(
-      child: provider.ChangeNotifierProvider(
-        create: (_) => CounterProvider(),
+      child: provider.MultiProvider(
+        providers: [
+          provider.ChangeNotifierProvider(create: (_) => ProductProvider()),
+        ],
         child: const MyApp(),
       ),
     ),
@@ -22,8 +24,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'State Management Patterns',
-      home: const HomePage(),
+      title: 'Lista de Produtos',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const ProductListPage(),
     );
   }
 }
