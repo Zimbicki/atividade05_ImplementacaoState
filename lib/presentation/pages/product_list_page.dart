@@ -11,6 +11,25 @@ class ProductListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Produtos (Provider)'),
+        actions: [
+          Consumer<ProductProvider>(
+            builder: (context, provider, child) {
+              final favoritesCount = provider.products.where((p) => p.favorite).length;
+              return Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: Center(
+                  child: Text(
+                    '$favoritesCount favoritos',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Consumer<ProductProvider>(
         builder: (context, provider, child) {
