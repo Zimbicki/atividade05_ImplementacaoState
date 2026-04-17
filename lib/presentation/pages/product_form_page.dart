@@ -27,9 +27,12 @@ class _ProductFormPageState extends State<ProductFormPage> {
   void initState() {
     super.initState();
     _nameController = TextEditingController(text: widget.product?.name ?? '');
-    _priceController = TextEditingController(text: widget.product?.price.toString() ?? '');
-    _descriptionController = TextEditingController(text: widget.product?.description ?? '');
-    _imageUrlController = TextEditingController(text: widget.product?.imageUrl ?? '');
+    _priceController =
+        TextEditingController(text: widget.product?.price.toString() ?? '');
+    _descriptionController =
+        TextEditingController(text: widget.product?.description ?? '');
+    _imageUrlController =
+        TextEditingController(text: widget.product?.imageUrl ?? '');
   }
 
   @override
@@ -94,9 +97,12 @@ class _ProductFormPageState extends State<ProductFormPage> {
               TextFormField(
                 controller: _priceController,
                 decoration: const InputDecoration(labelText: 'Preço'),
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
                 validator: (value) {
-                  if (value == null || double.tryParse(value) == null || double.parse(value) <= 0) {
+                  if (value == null ||
+                      double.tryParse(value) == null ||
+                      double.parse(value) <= 0) {
                     return 'Insira um preço válido maior que zero.';
                   }
                   return null;

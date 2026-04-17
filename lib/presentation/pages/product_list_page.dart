@@ -19,13 +19,16 @@ class ProductListPage extends StatelessWidget {
         actions: [
           Consumer<ProductProvider>(
             builder: (context, provider, child) {
-              final favoritesCount = provider.products.where((p) => p.favorite).length;
+              final favoritesCount =
+                  provider.products.where((p) => p.favorite).length;
               return Center(
                 child: Padding(
                   padding: const EdgeInsets.only(right: 16.0),
                   child: Chip(
-                    backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-                    avatar: const Icon(Icons.star, size: 16, color: Colors.orange),
+                    backgroundColor:
+                        Theme.of(context).colorScheme.primaryContainer,
+                    avatar:
+                        const Icon(Icons.star, size: 16, color: Colors.orange),
                     label: Text(
                       '$favoritesCount',
                       style: const TextStyle(
@@ -44,7 +47,7 @@ class ProductListPage extends StatelessWidget {
           if (provider.isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
-          
+
           if (provider.products.isEmpty) {
             return const Center(child: Text('Nenhum produto encontrado.'));
           }
@@ -71,7 +74,8 @@ class ProductListPage extends StatelessWidget {
                           ? Image.network(
                               product.imageUrl,
                               fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) => const Icon(
+                              errorBuilder: (context, error, stackTrace) =>
+                                  const Icon(
                                 Icons.image_not_supported,
                                 color: Colors.grey,
                               ),
@@ -93,64 +97,68 @@ class ProductListPage extends StatelessWidget {
                       ),
                     ),
                     trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        product.favorite ? Icons.star : Icons.star_border,
-                        color: product.favorite ? Colors.amber : null,
-                      ),
-                      onPressed: () {
-                        provider.toggleFavorite(index);
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.edit, color: Colors.blue),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ProductFormPage(product: product),
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            product.favorite ? Icons.star : Icons.star_border,
+                            color: product.favorite ? Colors.amber : null,
                           ),
-                        );
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.red),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (ctx) => AlertDialog(
-                            title: const Text('Excluir Produto'),
-                            content: const Text('Tem certeza que deseja excluir esse produto?'),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(ctx),
-                                child: const Text('Cancelar'),
+                          onPressed: () {
+                            provider.toggleFavorite(index);
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.edit, color: Colors.blue),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ProductFormPage(product: product),
                               ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(ctx);
-                                  provider.deleteProduct(product.id);
-                                },
-                                child: const Text('Excluir', style: TextStyle(color: Colors.red)),
+                            );
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.red),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: const Text('Excluir Produto'),
+                                content: const Text(
+                                    'Tem certeza que deseja excluir esse produto?'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(ctx),
+                                    child: const Text('Cancelar'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(ctx);
+                                      provider.deleteProduct(product.id);
+                                    },
+                                    child: const Text('Excluir',
+                                        style: TextStyle(color: Colors.red)),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        );
-                      },
+                            );
+                          },
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProductDetailsPage(product: product),
-                    ),
-                  );
-                },
-              ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ProductDetailsPage(product: product),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             },

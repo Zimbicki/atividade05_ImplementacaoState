@@ -48,7 +48,8 @@ class ProductDetailsPage extends StatelessWidget {
                 Expanded(
                   child: Text(
                     product.name,
-                    style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                 ),
                 if (product.favorite)
@@ -78,8 +79,11 @@ class ProductDetailsPage extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              product.description.isEmpty ? 'Sem descrição.' : product.description,
-              style: const TextStyle(fontSize: 16, height: 1.5, color: Colors.black87),
+              product.description.isEmpty
+                  ? 'Sem descrição.'
+                  : product.description,
+              style: const TextStyle(
+                  fontSize: 16, height: 1.5, color: Colors.black87),
             ),
           ],
         ),
